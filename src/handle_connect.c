@@ -483,7 +483,8 @@ int handle__connect(struct mosquitto_db *db, struct mosquitto *context)
 		}
 	}
 
-	clean_start = (connect_flags & 0x02) >> 1;
+    /* force clean start o always be true */
+	clean_start = true;
 	/* session_expiry_interval will be overriden if the properties are read later */
 	if(clean_start == false && protocol_version != PROTOCOL_VERSION_v5){
 		/* v3* has clean_start == false mean the session never expires */
